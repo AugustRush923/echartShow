@@ -5,7 +5,6 @@ __pycache__/
 .idea/
 .DS_Store
 *.sql
-*.xml
 
 # C extensions
 *.so
@@ -64,9 +63,6 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 *.rdb
-migrations/
-.qiniu_pythonsdk_hostscache.json
-
 # Flask stuff:
 instance/
 .webassets-cache
@@ -142,9 +138,3 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
-
-# qiniu file
-.qiniu_pythonsdk_hostscache.json
-
-# log
-logs/

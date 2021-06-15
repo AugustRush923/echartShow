@@ -13,14 +13,14 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#+=lgw8fbra0nxim#@t!*g3_bhjn*utgd7ll^*tl2r!jxm#-0q'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -75,12 +75,6 @@ WSGI_APPLICATION = 'dataShow.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -120,3 +114,7 @@ USE_L10N = True
 
 STATIC_URL = '/static/'
 
+try:
+    from .local_settings import *
+except ImportError:
+    print('请创建本地配置文件。')
