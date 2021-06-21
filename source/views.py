@@ -25,9 +25,11 @@ class AllView(View):
         if not hscode:
             return HttpResponseNotFound("not found")
         export_type = request.GET.get('export_type')
-        datas = Data.objects.filter(is_delete=True, hscode=hscode,
-                                    export_type=export_type if export_type else "volume of exports")
-
+        if not export_type:
+            export_type = "volume of exports"
+        datas = Data.objects.filter(is_delete=True, hscode=hscode, export_type=export_type)
+        if not datas:
+            return HttpResponseNotFound("暂还未拥有此类数据，敬请期待。")
         data_2019 = [("2019年" + str(data.data_months) + "月", data.export_data_2019) for data in datas]
         data_2020 = [("2020年" + str(data.data_months) + "月", data.export_data_2020) for data in datas]
         data_2021 = [("2021年" + str(data.data_months) + "月", data.export_data_2021) for data in datas]
@@ -64,9 +66,12 @@ class AllView(View):
 class SingleView(View):
     def get(self, request, hscode, year):
         print(hscode)
+        if not all([hscode, year]):
+            return HttpResponseNotFound("参数有误。")
         export_type = request.GET.get('export_type')
-        datas = Data.objects.filter(is_delete=True, hscode=hscode,
-                                    export_type=export_type if export_type else "volume of exports")
+        if not export_type:
+            export_type = "volume of exports"
+        datas = Data.objects.filter(is_delete=True, hscode=hscode, export_type=export_type)
         y_axis = []
         x_axis = [str(data.data_months) for data in datas]
         if year == 2019:
@@ -94,7 +99,7 @@ class SingleView(View):
                            ),
                            )
                 .set_global_opts(
-                title_opts=opts.TitleOpts(title="出口走势图", subtitle="{hscode}-{export_type}"),
+                title_opts=opts.TitleOpts(title="出口走势图", subtitle=f"{hscode}-{export_type}"),
 
             )
         )
