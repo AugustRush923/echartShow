@@ -41,7 +41,7 @@ class AllView(View):
         c = (
             Line(init_opts=CustomerInitOpts())
                 .add_xaxis(x_axis)
-                .add_yaxis(series_name="出口量",
+                .add_yaxis(series_name="出口量" if export_type != "value of exports" else "出口额",
                            y_axis=y_axis,
                            markpoint_opts=opts.MarkPointOpts(
                                data=[
@@ -84,7 +84,7 @@ class SingleView(View):
         c = (
             Line(init_opts=CustomerInitOpts())
                 .add_xaxis(x_axis)
-                .add_yaxis(series_name="出口量",
+                .add_yaxis(series_name="出口量" if export_type != "value of exports" else "出口额",
                            y_axis=y_axis,
                            markpoint_opts=opts.MarkPointOpts(
                                data=[
