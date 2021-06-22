@@ -7,7 +7,7 @@ __pycache__/
 *.sql
 *.ini
 logs/
-
+uwsgi.*
 # C extensions
 *.so
 sms_test/
