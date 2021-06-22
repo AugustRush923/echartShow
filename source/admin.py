@@ -38,25 +38,25 @@ class DataManagerAdmin(admin.ModelAdmin):
 
     def get_2019_line_chart(self, obj):
         if obj.export_type != "value of exports":
-            return mark_safe(u'<a href="/show/%s/" target="_blank">%s</a>' % (obj.hscode, "2019出口量"))
+            return mark_safe(u'<a href="/show/%s/2019/" target="_blank">%s</a>' % (obj.hscode, "2019出口量"))
         return mark_safe(
-            u'<a href="/show/%s/?export_type=value of exports" target="_blank">%s</a>' % (obj.hscode, "2019出口额"))
+            u'<a href="/show/%s/2019/?export_type=value of exports" target="_blank">%s</a>' % (obj.hscode, "2019出口额"))
 
     get_2019_line_chart.short_description = "2019年走势图"
 
     def get_2020_line_chart(self, obj):
         if obj.export_type != "value of exports":
-            return mark_safe(u'<a href="/show/%s/" target="_blank">%s</a>' % (obj.hscode, "2020出口量"))
+            return mark_safe(u'<a href="/show/%s/2020/" target="_blank">%s</a>' % (obj.hscode, "2020出口量"))
         return mark_safe(
-            u'<a href="/show/%s/?export_type=value of exports" target="_blank">%s</a>' % (obj.hscode, "2020出口额"))
+            u'<a href="/show/%s/2020/?export_type=value of exports" target="_blank">%s</a>' % (obj.hscode, "2020出口额"))
 
     get_2020_line_chart.short_description = "2020年走势图"
 
     def get_2021_line_chart(self, obj):
         if obj.export_type != "value of exports":
-            return mark_safe(u'<a href="/show/%s/" target="_blank">%s</a>' % (obj.hscode, "2021出口量"))
+            return mark_safe(u'<a href="/show/%s/2021/" target="_blank">%s</a>' % (obj.hscode, "2021出口量"))
         return mark_safe(
-            u'<a href="/show/%s/?export_type=value of exports" target="_blank">%s</a>' % (obj.hscode, "2021出口额"))
+            u'<a href="/show/%s/2021/?export_type=value of exports" target="_blank">%s</a>' % (obj.hscode, "2021出口额"))
 
     get_2021_line_chart.short_description = "2021年走势图"
 
