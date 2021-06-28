@@ -24,6 +24,19 @@ class DataManagerAdmin(admin.ModelAdmin):
         (None, {'fields': (('export_type', 'unit'),)}),
         (None, {'fields': ('is_delete',)}),
     )
+    actions = ("set_status_visible", "set_status_invisible")
+
+    def set_status_visible(self, request, queryset):
+        queryset.update(is_delete=True)
+        self.message_user(request, "操作成功")
+
+    set_status_visible.short_description = "使所选 可见"
+
+    def set_status_invisible(self, request, queryset):
+        queryset.update(is_delete=False)
+        self.message_user(request, "操作成功")
+
+    set_status_invisible.short_description = "使所选 不可见"
 
     def get_all_year_line_chart(self, obj):
         if obj.export_type != "value of exports":
