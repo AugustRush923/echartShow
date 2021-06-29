@@ -1,5 +1,6 @@
 from django.utils.safestring import mark_safe
 from django.contrib import admin
+from django.contrib.auth import get_permission_codename
 from .models import Data
 
 
@@ -31,12 +32,24 @@ class DataManagerAdmin(admin.ModelAdmin):
         self.message_user(request, "操作成功")
 
     set_status_visible.short_description = "使所选 可见"
+    set_status_visible.allowed_permissions = ['set_visible']
+
+    def has_set_visible_permission(self, request):
+        opts = self.opts
+        codename = get_permission_codename('set_visible', opts)
+        return request.user.has_perm("%s.%s" % (opts.app_label, codename))
 
     def set_status_invisible(self, request, queryset):
         queryset.update(is_delete=False)
         self.message_user(request, "操作成功")
 
     set_status_invisible.short_description = "使所选 不可见"
+    set_status_invisible.allowed_permissions = ['set_invisible']
+
+    def has_set_invisible_permission(self, request):
+        opts = self.opts
+        codename = get_permission_codename('set_invisible', opts)
+        return request.user.has_perm("%s.%s" % (opts.app_label, codename))
 
     def get_all_year_line_chart(self, obj):
         if obj.export_type != "value of exports":
